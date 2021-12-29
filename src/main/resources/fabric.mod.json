@@ -1,29 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "breeds_and_beasts",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Breeds and Beasts",
+  "description": "Breeds and Beasts introduces Mob Genes into the game, allowing the player to create Cross-Breeds of mobs.",
   "authors": [
-    "Me!"
+    "PixelNinja"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "",
+    "sources": ""
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/breedsandbeasts/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.pixelninja.breedsandbeasts.BreedsAndBeasts"
+    ],
+    "cardinal-components-entity": [
+      "com.pixelninja.breedsandbeasts.BreedsAndBeasts"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "breedsandbeasts.mixins.json"
   ],
 
   "depends": {
@@ -34,5 +37,11 @@
   },
   "suggests": {
     "another-mod": "*"
+  },
+
+  "custom": {
+    "cardinal-components": [
+        "breedsandbeasts:genes"
+    ]
   }
 }
