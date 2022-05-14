@@ -1,15 +1,22 @@
 package com.pixelninja.breedsandbeasts;
 
-import java.util.Iterator;
-
 public enum Gene {
-    Sheep,
-    Ender,
-    Creeper,
-    Flaming,
-    Goat,
-    Llama,
-    Ghastly,
-    Arthropod,
-    Undead;
+    SHEEP("Sheep"),
+    ENDER("Ender"),
+    CREEPER("Creeper"),
+    FLAMING("Flaming"),
+    GOAT("Goat"),
+    LLAMA("Llama"),
+    GHASTLY("Ghastly"),
+    ARTHROPOD("Arthropod"),
+    UNDEAD("Undead");
+
+    public String name;
+    Gene(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

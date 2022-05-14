@@ -19,7 +19,7 @@ public class BreedsAndBeasts implements ModInitializer, EntityComponentInitializ
 
     @Override
     public void onInitialize() {
-        //ItemRegistry.register();
+        ItemRegistry.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> GeneCommand.register(dispatcher));
 
     }

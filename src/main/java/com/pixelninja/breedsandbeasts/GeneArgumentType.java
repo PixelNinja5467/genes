@@ -25,13 +25,13 @@ public class GeneArgumentType implements ArgumentType<Gene> {
 
     @Override
     public Gene parse(StringReader reader) throws CommandSyntaxException {
-        return Gene.valueOf(reader.readString());
+        return Gene.valueOf(reader.readString().toUpperCase());
     }
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         for (Gene gene : Gene.values()) {
-            builder.suggest(gene.toString());
+            builder.suggest(gene.getName());
         }
         return builder.buildFuture();
     }

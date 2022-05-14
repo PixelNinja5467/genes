@@ -6,14 +6,12 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 
-import java.util.List;
-
 public class GeneAppleItem extends Item {
     Gene gene;
-    List<Gene> geneList;
     Settings settings;
     public boolean isConverting = false;
 
@@ -46,6 +44,9 @@ public class GeneAppleItem extends Item {
         int conversionTime = 1200;
         while (this.isConverting) {
             conversionTime--;
+            if (!entity.world.isClient) {
+                entity.world.addParticle(ParticleTypes.HAPPY_VILLAGER, entity.getX(), entity.getY(), entity.getZ(), Math.random(), Math.random(), Math.random());
+            }
             if (conversionTime < 0) {
                 GeneComponent.KEY.get(entity).addGene(this.gene);
                 entity.removeStatusEffect(StatusEffects.WEAKNESS);

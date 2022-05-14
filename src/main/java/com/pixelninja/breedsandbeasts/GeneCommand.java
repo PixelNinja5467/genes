@@ -19,13 +19,18 @@ public class GeneCommand {
                 .then(CommandManager.argument("entities", EntityArgumentType.entities())
                     .then(CommandManager.literal("add")
                         .then(CommandManager.argument("gene", GeneArgumentType.gene())
-                            .executes(context -> executeAddGene(context.getSource(), EntityArgumentType.getEntities(context, "entities"), GeneArgumentType.getGene(context, "gene"))))))
-        );
+                            .executes(context -> executeAddGene(context.getSource(), EntityArgumentType.getEntities(context, "entities"), GeneArgumentType.getGene(context, "gene")))))
+                        .then(CommandManager.literal("remove")
+                                .then(CommandManager.argument("gene", GeneArgumentType.gene())))
+                        .executes(context -> executeRemoveGene(context.getSource(), EntityArgumentType.getEntities(context, "entities"), GeneArgumentType.getGene(context, "gene")))
+                ));
     }
 
     public static int executeAddGene(ServerCommandSource source, Collection<? extends net.minecraft.entity.Entity> entities, Gene gene) {
         for (Entity entity : entities) {
-            GeneComponent.KEY.get(entity).addGene(gene);
+            if (!GeneComponent.KEY.get(entity).hasGene(gene)){
+                GeneComponent.KEY.get(entity).addGene(gene);
+            }
         }
         source.sendFeedback(new LiteralText("Added the ").append(gene.name()).append(" gene to ").append(String.valueOf(entities.size())).append(" entities."), true);
         return 1;
@@ -33,7 +38,9 @@ public class GeneCommand {
 
     public static int executeRemoveGene(ServerCommandSource source, Collection<? extends net.minecraft.entity.Entity> entities, Gene gene) {
         for (Entity entity : entities) {
-            GeneComponent.KEY.get(entity).removeGene(gene);
+            if (GeneComponent.KEY.get(entity).hasGene(gene)) {
+                GeneComponent.KEY.get(entity).removeGene(gene);
+            }
         }
         source.sendFeedback(new LiteralText("Removed the ").append(gene.name()).append(" gene to ").append(String.valueOf(entities.size())).append(" entities."), true);
         return 1;

@@ -22,7 +22,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "playHurtSound", at = @At("HEAD"))
     public void fire(DamageSource source, CallbackInfo ci) {
-        if (GeneComponent.KEY.get(this).hasGene(Gene.Flaming)) {
+        if (GeneComponent.KEY.get(this).hasGene(Gene.FLAMING)) {
             this.world.spawnEntity(EntityType.SMALL_FIREBALL.create(this.world));
         }
     }
